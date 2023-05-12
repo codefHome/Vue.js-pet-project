@@ -4,7 +4,10 @@
 **/dist
 **/tmp
 **/out-tsc
+<<<<<<< HEAD
 **/bin
+=======
+>>>>>>> 30168d462fc3ac11aa49d831eba5682e737ac5f2
 
 # dependencies
 **/node_modules
@@ -21,11 +24,13 @@
 *.sublime-workspace
 
 # IDE - VSCode
+
 **/.vscode/*
 **/!.vscode/settings.json
 **/!.vscode/tasks.json
 **/!.vscode/launch.json
 **/!.vscode/extensions.json
+
 
 # misc
 /.sass-cache
