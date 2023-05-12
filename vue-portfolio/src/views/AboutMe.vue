@@ -1,15 +1,15 @@
 <template>
-  <b-container >
+  <div >
   
-    <b-card class="aboutMeSectionOne">
+    <div class="aboutMeSectionOne">
      <h1>About Me</h1>
      <CircleList/>
      <span> 
 <hr/>
      </span>
-    </b-card>
-    <b-card class="aboutMeStyle">
-      <b-card>
+    </div>
+    <div class="aboutMeStyle">
+      <div>
         <p>
  {{ stateContainer.aboutSection1 }}
 </p>
@@ -20,8 +20,8 @@
  {{ stateContainer.aboutSection3 }}
 
 </p>
-    </b-card>
-    <b-card class="imageContainer">
+    </div>
+    <div class="imageContainer">
     
       <img class="myImageStyle" alt="my image" src="@/assets/child.jpg" width="400" height="300"/>
       <p>Here are a few stacks I’ve been working with recently:</p>
@@ -37,9 +37,9 @@
       </template>
 </ul>
     </div>
-    </b-card>
-    </b-card>
-  </b-container>
+    </div>
+    </div>
+  </div>
 </template>
 <script setup lang="ts">
 import { useStateContainer } from '@/stores/store';
