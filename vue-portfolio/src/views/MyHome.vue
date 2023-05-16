@@ -1,15 +1,26 @@
 <template class="mainTemplate">
-  <div class="myHomeStyle">
-    <p class="myNameIs">Hi, my name is</p>
-    <h1>Bedada Bekele.</h1>
+  <b-container class="myHomeStyle">
+  <b-row  >
+  <b-col cols="12">
+      <p class="myNameIs">Hi, my name is</p>
+      <h1>Bedada Bekele.</h1>
     <h2>{{ stateContainer.homeTitle }}</h2>
-    <p class="detailedInfo">
+    </b-col>
+    <b-col class="detailedInfo" sm="12" md="8" lg="5" exl="6" offset-sm="0" offset-md="1" offset-lg="1">
+    <p >
         {{ stateContainer.homeDetail }}</p>
-  </div>
+    </b-col>
+  </b-row>
+  <b-row >
+    <RecAndCircleSvg/>
+  </b-row>
+   
+  </b-container>
 </template>
 
 <script setup lang="ts">
 import { useStateContainer } from '@/stores/store';
+import RecAndCircleSvg from './RecAndCircleSvg.vue';
 
 const stateContainer=useStateContainer()
 console.log( stateContainer.homeDetail)
@@ -20,7 +31,7 @@ console.log( stateContainer.homeDetail)
     display: flex;
     flex-direction: row;
     gap: 2px;
-    
+  
 }
 .myHomeStyle{
     padding-top:20px;
@@ -43,14 +54,12 @@ h2{
 font-size: 20px;
 filter:brightness(65%);
 line-height:1.5;
-float: right;
+/* float: right; */
 text-align: justify;
-width:20em;
-
+/* width:25em; */
+margin-top: 2em;
+line-height: 2em;
 
 }
-pre {
-  white-space: pre-wrap;
-  font-family: 'Times New Roman';
-}
+
 </style>

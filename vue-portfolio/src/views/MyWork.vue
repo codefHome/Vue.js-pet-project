@@ -1,31 +1,21 @@
 <template>
- <b-container>
-  <b-row>
-    <b-col >
-      About first col
-    </b-col>
-    <b-col>
-      About second col
-    </b-col>
-    <b-col>
-      About third col
-    </b-col>
-  </b-row>
-  <b-row>
-    <b-col >
-      About first col
-    </b-col>
-    <b-col>
-      About second col
-    </b-col>
-    <b-col>
-      About third col
-    </b-col>
-  </b-row>
-</b-container>
+<!-- 
+<b-container>
+    <b-row class="mb-5">
+      <b-col sm="4">col1</b-col>
+      <b-col sm="4">col2</b-col>
+      <b-col sm="4">col3</b-col>
+    </b-row>
+    <b-row>
+      <b-col sm="4">col4</b-col>
+      <b-col sm="4">col5</b-col>
+      <b-col sm="4">col6</b-col>
+    </b-row>
+  </b-container> -->
+  <div></div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "ExampleM",
 };

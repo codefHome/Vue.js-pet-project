@@ -1,35 +1,40 @@
 <template>
-  <div class="logo">
-    <a href="#home">
-<img alt="Logo" src="@/assets/mylogo.svg" width="50" height="60"/>
-  </a>
-  </div>
-  <div v-if="!isMinWidth" class="header">
-<nav>
-  <ul>
-    <li>
-      <a href="#about">About</a>
-    </li>
- <li>
-  <a href="#experience">Experience</a>
- </li> 
- <li>
-  <a href="#work">Work</a>
- </li>
- <li>
-  <a href="#contact">Contact</a>
- </li>
- <div class="buttonDiv">
-  <a href="#"> Resume </a>
- </div>
-  
-  </ul>
- 
-</nav>
-</div>
-<div class="modalStyle" v-if="isMinWidth">
+  <b-container>
+    <b-row >
+       <b-col   >
+        <a href="#home">
+    <img alt="Logo" src="@/assets/mylogo.svg" width="50" height="60"/>
+      </a>
+      </b-col>
+      <b-col  v-if="!isMinWidth" class="header">
+    <nav>
+      <ul>
+        <li>
+          <a href="#about">About</a>
+        </li>
+     <li>
+      <a href="#experience">Experience</a>
+     </li> 
+     <li>
+      <a href="#work">Work</a>
+     </li>
+     <li>
+      <a href="#contact">Contact</a>
+     </li>
+     <div class="buttonDiv">
+      <a href="#"> Resume </a>
+     </div>
+      
+      </ul>
+     
+    </nav>
+    </b-col>
+<b-col    v-if="isMinWidth"  class="modalStyle">
   <CollabseIcon/>
-</div>
+</b-col>
+    </b-row>
+  
+  </b-container>
 </template>
 
 <script setup lang="ts">
@@ -46,24 +51,25 @@ let isMinWidth=computed(()=>{
 
 <style scoped>
 .header{
-  display: flex;
+  display:flex;
   justify-content: flex-end;
-  padding-right: 40px;
-
 }
 .header nav ul li a{
   text-decoration: none;
   margin:15px;
-  color:blueviolet
+  color:blueviolet;
+ 
 }
 .header nav ul li a:hover{
   color:White;
   font-size:30px;
 }
 .logo{
-  display: flex;
-  justify-content: flex-start;
- background-color: white;
+ 
+}
+.logo img{
+  background-color: white;
+  /* margin-left:-50px; */
 }
 .logo:hover{
   width:60px;
@@ -77,15 +83,22 @@ ul {
 
 .buttonDiv a {
   color:white;
-  border: 1px solid black;
+  border: 1px solid blue;
   text-decoration: none;
-  padding:3px;
+  padding:5px;
   font-size:20px;
-  border-radius:6px 0 5px 0
+  border-radius:6px 0 5px 0;
+  background-color: #1d7472;
 }
-.buttonDiv a:hover{
-  font-size:25px;
- box-shadow: 4px 4px black
+.buttonDiv:hover{
+  /* font-size:25px; */
+ box-shadow: 6px 6px #8b5f5a;
+ margin-top:-4px;
+ margin-left: -4px;
 }
-
+.modalStyle{
+  display:flex;
+  justify-content: flex-end;
+ 
+}
 </style>

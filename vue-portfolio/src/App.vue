@@ -1,58 +1,65 @@
-<template>
+<template >
+ 
 
-  
     <div class="mainContainer">
-      
-  <div class="mainHeader">
-    <HeaderWithLogo />
-  </div>
-  <div class="bodyContainer">
-    <div>
-      <div class="socialLinkStyle">
-      <SocialLink/>
-      
-    </div>
-    <VerticalLine
-    myBottom="0"
-    myTop="620px"
-    myLeft="70px"
-    myBorder-left="3px solid #b0fc38"
-    myHeight="100px" 
-    />
-  
-    </div>
-    <div>
-  <section   id="home"><MyHome/>  </section>
-  <section  id="about"><AboutMe/></section>
-  <section   id="experience"><MyExperience/></section>
-  <section   id="work"><MyWork/></section>
-  <section id="contact"><ContactMe/></section>
-    </div>
-    <div>
-      <div class="sideNavStyle">
-      <ShowNavigation :isActive="isActive"/>
-    </div>
-      <div class="myEmail">
-     <p>
-      bedada6@gmail.com 
-  </p>
-    </div>
-    <VerticalLine
-    myBottom="0"
-    myTop="660px"
-    myLeft="1400px"
-    myBorder-left="3px solid #b0fc38"
-    myHeight="100px" 
-    />
     
-    </div>
-  
-  </div>
+      <b-container >
+           
+       <b-row class="mainHeader">
+         <HeaderwithLogo />
+       </b-row>
+        <b-row >
+        <b-col  md="2" lg="2" >
+          <div v-if="!isMinWidth">
+           <div class="socialLinkStyle">
+           <SocialLink/>
+           
+         </div>
+         <VerticalLine
+         myBottom="0"
+         myTop="620px"
+         myLeft="70px"
+         myBorder-left="3px solid #b0fc38"
+         myHeight="100px" 
+         />
+       
+         </div>
+        </b-col>
+        
+         <b-col xsm="12" sm="12" md="8" lg="8">
+       <section   id="home"><MyHome/>  </section>
+       <section  id="about"><AboutMe/></section>
+       <section   id="experience"><MyExperience/></section>
+       <section   id="work"><MyWork/></section>
+       <section id="contact"><ContactMe/></section>
+         </b-col>
+         <b-col  md="2" lg="2">
+    
+           <div  v-if="!isMinWidth">
+             <div class="sideNavStyle">
+             <ShowNavigation :isActive="isActive"/>
+           </div>
+             <div class="myEmail">
+            <p>
+             bedada6@gmail.com 
+         </p>
+           </div>
+           <VerticalLine
+           myBottom="0"
+           myTop="660px"
+           myLeft="1400px"
+           myBorder-left="3px solid #b0fc38"
+           myHeight="100px" 
+           />
+           
+           </div>
+         </b-col>
+       
+       </b-row> 
+         </b-container>
     </div>
 
- 
- 
- 
+
   
 </template>
 
@@ -64,24 +71,24 @@ import MyExperience from './views/MyExperience.vue';
 import MyWork from './views/MyWork.vue';
 import  MyHome from './views/MyHome.vue';
 import CollabseIcon from './views/CollabseIcon.vue'
-import {ref,computed,onMounted} from 'vue'
+import {ref,onUnmounted,onMounted,computed} from 'vue'
 import  ShowNavigation from './views/ShowNavigation.vue';
-// import  HeaderWithLogo from './views/HeaderWithLogo.vue';
+
 import SocialLink from './views/SocialLink.vue'
 import VerticalLine from './views/VerticalLine.vue'
+import HeaderwithLogo from './views/HeaderwithLogo.vue';
 
-const hide=ref(true)
+const hide=ref(false)
 const isActive=ref('home')
 const sections=ref([
   {id:'home',title:'Home'},
   {id:'about',title:'About'},
   {id:'experience',title:'Experience'},
-  {id:'work',title:'Work'},
   {id:'contact',title:'Contact'}
 ])
-
+let observer:IntersectionObserver | null;
 onMounted(()=>{
-  const observer=new IntersectionObserver(entries=>{
+  observer =new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
        isActive.value=entry.target.id
@@ -94,13 +101,22 @@ onMounted(()=>{
     
    const el=document.getElementById(section.id)
 
-    // observer.observe(el)
+   observer?.observe(el!)
   })
+
 })
 
+ onUnmounted(() => {
+      observer?.disconnect();
+    });
 
-
-
+    const minWidth=ref(window.innerWidth)
+window.addEventListener('resize', () => {
+  minWidth.value = window.innerWidth;
+});
+let isMinWidth=computed(()=>{
+ return minWidth.value <= 600 ? true : false 
+})
 
 
 </script>
@@ -108,8 +124,8 @@ onMounted(()=>{
 <style  scoped>
 
 .mainContainer{
-display: flex;
-flex-direction: row;
+/* display: flex;
+flex-direction: row; */
 color:white;
 font-size: 23px;
 background-color:   #0a192f;
@@ -117,22 +133,17 @@ width:100%;
 height:100%;
 }
 .mainHeader{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: absolute;
-  top:0;
-  width:100%;
-  height:50px;
-  padding: 45px;
-  /* box-shadow: 0px 0px 5px 5px grey; */
-  /* background-color: rgb(56,182,133); */
   
+ width:100%;
+  height:100px;
+  padding-top: 25px;
+  box-shadow: 0px 0px 5px 5px grey; 
+   background-color: rgb(56,182,133);
 }
 
 .bodyContainer{
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  /* grid-template-columns: 1fr 10fr 1fr; */
   width:100%;
   height:auto;
   margin-top: 97px;
@@ -145,42 +156,33 @@ height:100%;
 
 }
 .modalStyle{
-  margin-right:30px;
+  /* margin-right:30px; */
   
 }
 #home{
-display: flex;
-  width: 1000px;
-  height: 620px;
-  margin:5px;
-  padding:10px;
+  height: 750px;
 }
 #about{
-display: flex;
-  width: 1000px;
-  height: auto;
-  margin:5px;
-  padding:10px;
+
+  height: 800px;
+  
+ 
 }
 
 #experience{
-display: flex;
-  width: 1000px;
-  height: 620px;
-  margin:5px;
-  padding:10px;
+
+  height: 700px;
+
 }
 #contact{
-display: flex;
-  width: 100px;
+
   height: 750px;
-  margin:5px;
-  padding:10px;
+
 }
 .myEmail{
   position:fixed;
   top: 500px;
-  left: 1318px;
+  left: 1295px;
   color:white;
   transform: rotate(90deg);
   font-size:20px;
@@ -199,7 +201,7 @@ display: flex;
 .socialLinkStyle{
   position: fixed;
   top:450px;
-  left:20px;
+  left:30px;
 }
 /* .verticalLineSocial{
   position: fixed;

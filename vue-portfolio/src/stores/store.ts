@@ -13,12 +13,12 @@ exceptional digital experiences.
     aboutSection2: `Fast-forward to today, and I’ve had the privilege of working at an advertising agency, a start-up, a huge corporation, and a student-led design studio. My main focus these days is building accessible, inclusive products and digital experiences at Upstatement for a variety of clients.`,
     aboutSection3: `I also recently launched a course that covers everything you need to build a web app with the Spotify API using Node & React.`,
     stacks: [
-      { id: 1, name: 'React' },
-      { id: 2, name: 'Vue' },
-      { id: 3, name: 'Node.js' },
-      { id: 4, name: 'Nest.js' },
+      { id: 0, name: 'React' },
+      { id: 1, name: 'Vue' },
+      { id: 2, name: 'Node.js' },
+      { id: 3, name: 'Nest.js' },
+      { id: 4, name: 'Git' },
       { id: 5, name: 'TailwindCSS' },
-      { id: 6, name: 'Git' }
     ],
    experience:[
     {excellerent:[{id:1,content:'  Deliver high-quality, robust production code for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more'},
