@@ -2,8 +2,8 @@
   
 <b-container  class="contactSyle">
    <SectionHeader sectionTitle="Want to Contact Me"/>
-<b-row >
-<div class="contactSection2">
+<b-row class="contactSection2">
+
 <b-col class="mb-2">
     <h1>Send me a Message!</h1>
 </b-col>
@@ -12,7 +12,7 @@
     to say hello? Go head.
 </pre>
 </b-col>
-</div>
+
 </b-row>
 <b-row class="contactSection3">
 <form @submit.prevent="handleSubmit" class="formStyle">
@@ -112,17 +112,19 @@ const stateContainer=useStateContainer()
     color:blue;
     font-size:50px;
     margin-bottom: -10px;
+    text-align: center;
 }
 .contactSection2 pre{
     /* font-size:25em; */
     color:white;
     font-family: 'Times New Roman', Times, serif;
     font-weight: italic;
+    text-align: center;
+    background:none;
 }
 form{
     display:flex;
    flex-direction: column;
-   /* margin-left:15px; */
   row-gap: 2em;
 
   

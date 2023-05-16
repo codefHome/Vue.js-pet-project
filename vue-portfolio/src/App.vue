@@ -9,8 +9,8 @@
          <HeaderwithLogo />
        </b-row>
         <b-row >
-        <b-col  md="2" lg="2" >
-          <div v-if="!isMinWidth">
+        <b-col v-if="!isMinWidth" xsm="1" sm="1" md="1" lg="1" >
+          <div >
            <div class="socialLinkStyle">
            <SocialLink/>
            
@@ -26,16 +26,16 @@
          </div>
         </b-col>
         
-         <b-col xsm="12" sm="12" md="8" lg="8">
-       <section   id="home"><MyHome/>  </section>
-       <section  id="about"><AboutMe/></section>
-       <section   id="experience"><MyExperience/></section>
-       <section   id="work"><MyWork/></section>
-       <section id="contact"><ContactMe/></section>
-         </b-col>
-         <b-col  md="2" lg="2">
+         <b-col xsm="11" sm="11" md="10" lg="10">
+       <b-col class="mb-5"   id="home"><MyHome/>  </b-col>
+       <b-col class="mb-5 mt-4"  id="about"><AboutMe/></b-col>
+       <b-col  class="mb-5 mt-4"   id="experience"><MyExperience/></b-col>
+       <b-col  class="mb-5 mt-4" id="contact"><ContactMe/></b-col>
     
-           <div  v-if="!isMinWidth">
+         </b-col>
+         <b-col  v-if="!isMinWidth" xsm="1" sm="1" md="1" lg="1">
+    
+           <div >
              <div class="sideNavStyle">
              <ShowNavigation :isActive="isActive"/>
            </div>
@@ -159,26 +159,26 @@ height:100%;
   /* margin-right:30px; */
   
 }
-#home{
+/* #home{
   height: 750px;
-}
-#about{
+} */
+/* #about{
 
   height: 800px;
   
  
-}
+} */
 
-#experience{
+/* #experience{
 
-  height: 700px;
+  height: 800px;
 
-}
-#contact{
+} */
+/* #contact{
 
   height: 750px;
 
-}
+} */
 .myEmail{
   position:fixed;
   top: 500px;

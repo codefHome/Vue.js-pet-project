@@ -2,7 +2,7 @@
   <b-container>
     <SectionHeader sectionTitle="About Me"/>
     <b-row   >
-      <b-col sm="12" md="6" lg="6" >
+      <b-col sm="12" md="5" lg="6" >
         <p>
           {{ stateContainer.aboutSection1 }}
         </p>
@@ -14,24 +14,44 @@
 
         </p>
       </b-col>
-      <b-col sm="12" md="6" lg="6"  >
+      <b-col sm="12" md="7" lg="6"  >
 
-        <img src="@/assets/child.jpg" alt="My Image" width="300" height="250"/>
-
+       <b-col class="d-flex justify-content-center">
+      
+        <img class="imgStyle" src="@/assets/child.jpg" alt="My Image" />
+      
+        
+      
+        
+        
+       </b-col> 
 <b-row class="imageContainer">
   <p>Here are a few stacks I’ve been working with recently:</p>
-        <div class="stackContainer">
+        <b-row class="stackStyle">
+         <b-col >
           <ul>
             <template v-for="(stack, index) in stateContainer.stacks" :key="stack.id">
               <li v-if="index < 3">{{ stack.name }}</li>
             </template>
           </ul>
-          <ul>
+         </b-col>
+          <b-col >
+            <ul>
             <template v-for="(stack, index) in stateContainer.stacks" :key="stack.id">
               <li v-if="index > 2">{{ stack.name }}</li>
             </template>
           </ul>
-        </div>
+          </b-col>
+          
+          <b-col >
+            <ul>
+              <template v-for="(stack, index) in stateContainer.stacks" :key="stack.id">
+              <li v-if="index < 3">{{ stack.name }}</li>
+            </template>
+          </ul>
+          </b-col>
+          
+        </b-row>
 </b-row>
       </b-col>
     </b-row>
@@ -52,14 +72,10 @@ const stateContainer = useStateContainer();
 // })
 </script>
 <style scoped>
-/* @media (width <= 600px) {
-  .aboutMeStyle{
-display:grid;
-grid-template-columns: 2fr ;
-gap: 20px;
-background-color: red;
+.checkBack{
+  background-color: red;
+  margin-left:15px;
 }
-} */
 .aboutMeStyle {
   /* display: grid;
   grid-template-columns: 2fr 2fr;
@@ -111,17 +127,17 @@ span {
   margin-top: 10px;
 }
 
-.stackContainer {
+/* .stackContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+  grid-template-columns: 6fr 6fr;
+} */
 
 ul li {
   list-style-type: none;
 
 }
 
-.stackContainer ul li::before {
+.imageContainer ul li::before {
   content: '';
   display: inline-block;
   width: 0;
@@ -131,7 +147,9 @@ ul li {
   border-bottom: 5px solid transparent;
   border-left: 5px solid #b0fc38;
 }
-
+.imageContainer ul li{
+  margin-left:-30px;
+}
 .imageContainer p {
   font-weight: bold, italic;
   color: #b0fc38;
@@ -142,6 +160,40 @@ p {
   text-align: justify;
 }
 
+.imgStyle{
+  display:block;
+  width:70%;
+  height:auto;
+ filter:brightness(80%);
+ box-shadow: 15px 15px black, 17px 17px #b0fc38,-15px -15px blue, -17px -17px #b0fc38;
+ border: 1px solid #b0fc38;
+}
+.imgStyle:hover{
+ filter:brightness(100%);
+ margin-right:-5px;
+ margin-bottom:-5px;
+ box-shadow: -15px -15px black, -17px -17px #b0fc38,15px 15px blue, 17px 17px #b0fc38;
+}
 
-
+.spanImgStyle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:auto;
+ 
+}
+.stackStyle{
+  font-size: 17px;
+}
+@media (width <= 750px) {
+  .imgStyle{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.stackStyle{
+  font-size:12px;
+}
+}
 </style>
