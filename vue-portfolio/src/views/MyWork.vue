@@ -1,45 +1,54 @@
 <template>
- <b-container>
-  <b-row>
-    <b-col >
-      About first col
+  <b-container>
+  <b-row class="d-flex ">
+    <b-col sm="6">
+      <h2>This is a column on small screens.</h2>
+      <p>This is some text in the column.</p>
     </b-col>
-    <b-col>
-      About second col
-    </b-col>
-    <b-col>
-      About third col
-    </b-col>
-  </b-row>
-  <b-row>
-    <b-col >
-      About first col
-    </b-col>
-    <b-col>
-      About second col
-    </b-col>
-    <b-col>
-      About third col
+    <b-col sm="6">
+      <h2>This is a column on medium and large screens.</h2>
+      <p>This is some text in the column.</p>
     </b-col>
   </b-row>
 </b-container>
 </template>
 
-<script>
-export default {
-  name: "ExampleM",
-};
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  data() {
+    return {
+      color: 'red',
+    };
+  },
+  // mounted() {
+  //   const mediaQuery = window.matchMedia('(max-width: 600px)');
+  //   if (mediaQuery.matches) {
+  //     this.color = 'yellow';
+  //   } else {
+  //     this.color = 'green';
+  //   }
+  // },
+});
 </script>
 
 <style scoped>
-.bv-example-row{
-  border:1px solid black;
-  margin:5px;
-  width:100%;
-}
-.bv-example-row b-col{
-  border: 1px solid black;
- 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: blue;
 }
 
+@media (width <= 600px) {
+  .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: red;
+}
+}
 </style>
