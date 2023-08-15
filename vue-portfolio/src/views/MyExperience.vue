@@ -43,36 +43,36 @@
       </b-col>
       <b-col class="experienceContainer" xsm="12" sm="12" md="8" lg="10">
         <b-col sm="12" md="12"  lg="10"  v-if="activeTab === 'excellerent'">
-          <h2 class="workTitle">Software Engineer <span> @ Excellerent Solution</span></h2>
+          <h2 >Software Engineer <span> @ Excellerent Solution</span></h2>
           <p>June 2021 - present</p>
           <ul>
-            <template v-for="list in stateContainer.experience">
-              <li v-for="item in list.excellerent" :key="item.id">
-                {{ item.content }}
+         
+              <li  v-for="(item,index) in excellerent?.roleDetails" :key="index">
+                {{ item }}
               </li>
-            </template>
+      
           </ul>
         </b-col>
         <b-col sm="12" md="12"  lg="10" v-if="activeTab === 'haramaya'">
-          <h2 class="workTitle">Software Engineer <span> @ Haramaya University</span></h2>
+          <h2 >Software Engineer <span> @ Haramaya University</span></h2>
           <p>January 2018 - May 2021</p>
           <ul>
-            <template v-for="list in stateContainer.experience">
-              <li v-for="item in list.haramaya" :key="item.id">
-                {{ item.content }}
+           
+              <li v-for="(item,index) in haramaya?.roleDetails" :key="index">
+                {{ item }}
               </li>
-            </template>
+           
           </ul>
         </b-col>
         <b-col sm="12" md="12"  lg="10" v-if="activeTab === 'ambo'">
-          <h2 class="workTitle">Software Engineer <span> @ Ambo University</span></h2>
+          <h2 >Software Engineer <span> @ Ambo University</span></h2>
           <p>August 2016 - October 2017</p>
           <ul>
-            <template v-for="list in stateContainer.experience">
-              <li v-for="item in list.ambo" :key="item.id">
-                {{ item.content }}
+           
+              <li v-for="(item,index) in ambo?.roleDetails" :key="index">
+                {{ item }}
               </li>
-            </template>
+           
           </ul>
         </b-col>
       </b-col>
@@ -82,10 +82,15 @@
 <script setup lang="ts">
 import { useStateContainer } from '@/stores/store'
 import CircleList from './CircleList.vue'
-import { ref, computed } from 'vue'
+import { ref, computed,onMounted } from 'vue'
 import SectionHeader from './SectionHeader.vue';
 const stateContainer = useStateContainer()
 const activeTab = ref('excellerent')
+
+interface iDetail{
+  companyName:string;
+  roleDetails:string[]
+}
 const minWidth = ref(window.innerWidth)
 window.addEventListener('resize', () => {
   minWidth.value = window.innerWidth
@@ -105,7 +110,18 @@ function fontColor(value: string) {
 function handleClick(value: string) {
   activeTab.value = value
 }
-console.log('active tab', activeTab.value)
+const excellerent=ref<iDetail>()
+const haramaya=ref<iDetail>()
+const ambo=ref<iDetail>()
+
+onMounted(()=>{
+(async()=>{
+const data= await stateContainer.fetchData();
+excellerent.value=data[0].experiences[0]
+haramaya.value=data[0].experiences[1]
+ambo.value=data[0].experiences[2]
+})()
+})
 </script>
 <style scoped>
 /* .experienceContainer {
@@ -162,10 +178,7 @@ h2 span {
   padding-left: 5px;
 }
 
-.workTitle {
-  /* display: flex;
-   flex-direction: row; */
-}
+
 
 p {
   font-size: 15px;
@@ -176,7 +189,7 @@ p {
   display: inline-block;
   width: 0;
   height: 0;
-  margin-right: 0.2em;
+  margin-right: 0.55em;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #b0fc38;
@@ -184,8 +197,8 @@ p {
 
 .experienceContainer ul li {
   font-size: 20px;
-  font-family: 'Times New Roman';
-  text-align: left;
+  font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif ;
+  text-align: justify;
   text-indent: -0.9em;
   line-height: 1.5em;
 }

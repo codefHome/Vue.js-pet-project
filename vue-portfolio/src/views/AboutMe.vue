@@ -4,13 +4,13 @@
     <b-row   >
       <b-col sm="12" md="5" lg="6" >
         <p>
-          {{ stateContainer.aboutSection1 }}
+          {{ aboutSection.aboutSection1 }}
         </p>
         <p>
-          {{ stateContainer.aboutSection2 }}
+          {{ aboutSection.aboutSection2 }}
         </p>
         <p>
-          {{ stateContainer.aboutSection3 }}
+          {{ aboutSection.aboutSection3 }}
 
         </p>
       </b-col>
@@ -30,26 +30,28 @@
         <b-row class="stackStyle">
          <b-col >
           <ul>
-            <template v-for="(stack, index) in stateContainer.stacks" :key="stack.id">
-              <li v-if="index < 3">{{ stack.name }}</li>
+            <template v-for="(stack, index) in aboutSection.stacks" :key="stack.id">
+              <li v-if="index < 3" >{{ stack }}</li>
             </template>
           </ul>
          </b-col>
           <b-col >
             <ul>
-            <template v-for="(stack, index) in stateContainer.stacks" :key="stack.id">
-              <li v-if="index > 2">{{ stack.name }}</li>
+            <template v-for="(stack, index) in aboutSection.stacks" :key="stack.id">
+              <li v-if="index >2 && index <= 5">{{ stack }}</li>
             </template>
           </ul>
           </b-col>
           
           <b-col >
             <ul>
-              <template v-for="(stack, index) in stateContainer.stacks" :key="stack.id">
-              <li v-if="index < 3">{{ stack.name }}</li>
+              <template v-for="(stack, index) in aboutSection.stacks" :key="stack.id">
+              <li v-if="index > 5 && index <= 8">{{ stack }}</li>
             </template>
           </ul>
           </b-col>
+          
+         
           
         </b-row>
 </b-row>
@@ -60,16 +62,24 @@
 <script setup lang="ts">
 import { useStateContainer } from '@/stores/store';
 import CircleList from './CircleList.vue';
-import {ref,computed} from 'vue'
+import {onMounted,reactive} from 'vue'
 import  SectionHeader from './SectionHeader.vue';
 const stateContainer = useStateContainer();
-// const minWidth=ref(window.innerWidth)
-// window.addEventListener('resize', () => {
-//   minWidth.value = window.innerWidth;
-// });
-// let isMinWidth=computed(()=>{
-//  return minWidth.value <= 600 ? true : false 
-// })
+const aboutSection=reactive({
+  aboutSection1:'',
+  aboutSection2:'',
+  aboutSection3:'',
+  stacks:[]
+})
+onMounted(()=>{
+  (async()=>{
+    const data=await stateContainer.fetchData()
+aboutSection.aboutSection1=data[0].aboutSection1
+aboutSection.aboutSection2=data[0].aboutSection2
+aboutSection.aboutSection3=data[0].aboutSection3
+aboutSection.stacks=data[0].stacks
+  })()
+})
 </script>
 <style scoped>
 .checkBack{
@@ -134,7 +144,6 @@ span {
 
 ul li {
   list-style-type: none;
-
 }
 
 .imageContainer ul li::before {
@@ -185,15 +194,16 @@ p {
 }
 .stackStyle{
   font-size: 17px;
+  display:flex;
+  flex-direction:row;
 }
+
 @media (width <= 750px) {
   .imgStyle{
   display:block;
   width:100%;
   height:auto;
 }
-.stackStyle{
-  font-size:12px;
-}
+
 }
 </style>

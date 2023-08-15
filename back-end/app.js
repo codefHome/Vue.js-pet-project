@@ -59,9 +59,10 @@ const connection =require('./src/models/connection.js')
 //     html: HTML_TEMPLATE(message),
 // }
 dotenv.config()
-const port = process.env.PORT || 5173 ;
+const port1 = process.env.PORT1 ;
+const port2 = process.env.PORT2 ;
 const corsOptions = {
-  origin: `http://localhost:${parseInt(port)}` 
+  origin: [`http://localhost:${parseInt(port1)}`, `http://localhost:${parseInt(port2)}`]
 };
 app.use(cors(corsOptions))
 app.use(express.json());

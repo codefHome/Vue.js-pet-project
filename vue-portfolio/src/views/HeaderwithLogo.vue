@@ -65,7 +65,6 @@ let isMinWidth=computed(()=>{
   font-size:30px;
 }
 .logo{
- 
 }
 .logo img{
   background-color: white;

@@ -4,11 +4,11 @@
   <b-col cols="12">
       <p class="myNameIs">Hi, my name is</p>
       <h1>Bedada Bekele.</h1>
-    <h2>{{ stateContainer.homeTitle }}</h2>
+    <h2>{{  homeTitle }}</h2>
     </b-col>
     <b-col class="detailedInfo" sm="12" md="8" lg="5" exl="6" offset-sm="0" offset-md="1" offset-lg="1">
     <p >
-        {{ stateContainer.homeDetail }}</p>
+        {{ homeDetail }}</p>
     </b-col>
   </b-row>
   <b-row >
@@ -21,9 +21,24 @@
 <script setup lang="ts">
 import { useStateContainer } from '@/stores/store';
 import RecAndCircleSvg from './RecAndCircleSvg.vue';
-
+import {onMounted,ref} from 'vue'
 const stateContainer=useStateContainer()
-console.log( stateContainer.homeDetail)
+const homeTitle=ref('')
+const homeDetail=ref('')
+
+onMounted(()=>{
+  (async()=>{
+    const data=await stateContainer.fetchData()
+homeTitle.value=data[0].homeTitle
+homeDetail.value=data[0].homeDetail
+  })()
+})
+
+  
+
+
+// console.log(homeTitle.value)
+
 </script>
 
 <style  scoped>
