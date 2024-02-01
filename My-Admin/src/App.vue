@@ -1,8 +1,8 @@
 <template >
   <div class="mainContainer">
   <b-container :style="{backgroundColor: useState.isDark ? 'black' :'white', padding:'20px' }" >
-    <!-- <RouterView/> -->
-    <AnalyticsView/>
+    <RouterView/>
+    <!-- <AnalyticsView/> -->
   </b-container>
 </div>
 </template>

@@ -50,6 +50,7 @@
 
 <script setup lang="ts">
 import AboutMe from './views/AboutMe.vue'
+import SkillSets from './views/SkillSets.vue'
 import ContactMe from './views/ContactMe.vue'
 import MyExperience from './views/MyExperience.vue'
 // import  CheckSection from './views/CheckSection.vue';
