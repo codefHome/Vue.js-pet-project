@@ -1,97 +1,78 @@
 <template>
   <b-container>
-    <SectionHeader sectionTitle="About Me"/>
-    <b-row   >
-      <b-col sm="12" md="5" lg="6" >
-        <p>
-          {{ aboutSection.aboutSection1 }}
-        </p>
-        <p>
-          {{ aboutSection.aboutSection2 }}
-        </p>
-        <p>
-          {{ aboutSection.aboutSection3 }}
-
-        </p>
+    <SectionHeader sectionTitle="About Me" />
+    <b-row class="aboutSectionStyle">
+      <b-col sm="12" md="5" lg="6">
+        <div class="aboutMeStyle">
+          <p>
+            {{ aboutSection.aboutSection1 }}
+          </p>
+          <p>
+            {{ aboutSection.aboutSection2 }}
+          </p>
+          <p>
+            {{ aboutSection.aboutSection3 }}
+          </p>
+        </div>
       </b-col>
-      <b-col sm="12" md="7" lg="6"  >
-
-       <b-col class="d-flex justify-content-center">
-      
-        <img class="imgStyle" src="@/assets/child.jpg" alt="My Image" />
-      
+      <b-col sm="12" md="6" lg="5" >
+        <b-col  class="d-flex  " >
+          <img v-show="!isVideo" class="imgStyle" src="@/assets/Bedada.jpg" alt="My Image" />
+       <VideoIntro v-show="isVideo" :url="videoSource" />
+        </b-col>
         
-      
-        
-        
-       </b-col> 
-<b-row class="imageContainer">
-  <p>Here are a few stacks I’ve been working with recently:</p>
-        <b-row class="stackStyle">
-         <b-col >
-          <ul>
-            <template v-for="(stack, index) in aboutSection.stacks" :key="stack.id">
-              <li v-if="index < 3" >{{ stack }}</li>
-            </template>
-          </ul>
-         </b-col>
-          <b-col >
-            <ul>
-            <template v-for="(stack, index) in aboutSection.stacks" :key="stack.id">
-              <li v-if="index >2 && index <= 5">{{ stack }}</li>
-            </template>
-          </ul>
-          </b-col>
-          
-          <b-col >
-            <ul>
-              <template v-for="(stack, index) in aboutSection.stacks" :key="stack.id">
-              <li v-if="index > 5 && index <= 8">{{ stack }}</li>
-            </template>
-          </ul>
-          </b-col>
-          
-         
-          
-        </b-row>
-</b-row>
+        <b-col>
+          <text v-show="!isVideo" @click="showVideo" class="clickHereStyle">Click here to view a Video</text>
+          <text v-show="isVideo" @click="showVideo" class="clickHereStyle">Click here to view an Image</text>
+        </b-col>
+     
       </b-col>
     </b-row>
   </b-container>
 </template>
 <script setup lang="ts">
-import { useStateContainer } from '@/stores/store';
-import CircleList from './CircleList.vue';
-import {onMounted,reactive} from 'vue'
-import  SectionHeader from './SectionHeader.vue';
-const stateContainer = useStateContainer();
-const aboutSection=reactive({
-  aboutSection1:'',
-  aboutSection2:'',
-  aboutSection3:'',
-  stacks:[]
+import { useStateContainer } from '@/stores/store'
+import CircleList from './CircleList.vue'
+import { onMounted, reactive, ref } from 'vue'
+import SectionHeader from './SectionHeader.vue'
+import VideoIntro from './VideoIntro.vue'
+import videoSource from '../assets/videoIntro.mp4'
+const stateContainer = useStateContainer()
+const aboutSection = reactive({
+  aboutSection1: '',
+  aboutSection2: '',
+  aboutSection3: '',
+  stacks: []
 })
-onMounted(()=>{
-  (async()=>{
-    const data=await stateContainer.fetchData()
-aboutSection.aboutSection1=data[0].aboutSection1
-aboutSection.aboutSection2=data[0].aboutSection2
-aboutSection.aboutSection3=data[0].aboutSection3
-aboutSection.stacks=data[0].stacks
+const isVideo=ref(false)
+const showVideo=() =>{
+  isVideo.value=!isVideo.value
+}
+onMounted(() => {
+  ;(async () => {
+    const data = await stateContainer.fetchData()
+    aboutSection.aboutSection1 = data[0].aboutSection1
+    aboutSection.aboutSection2 = data[0].aboutSection2
+    aboutSection.aboutSection3 = data[0].aboutSection3
+    aboutSection.stacks = data[0].stacks
   })()
 })
+// console.log('abc',aboutSection.aboutSection1)
 </script>
 <style scoped>
-.checkBack{
+.checkBack {
   background-color: red;
-  margin-left:15px;
+  margin-left: 15px;
 }
 .aboutMeStyle {
-  /* display: grid;
-  grid-template-columns: 2fr 2fr;
-  gap: 50px; */
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
-.marginRight{
+.aboutMeStyle p {
+  font-size: 17px;
+}
+.marginRight {
   margin-right: 35px;
 }
 .myImageStyle {
@@ -101,12 +82,10 @@ aboutSection.stacks=data[0].stacks
   border: 1px solid #b0fc38 */
 }
 
-.myImageStyle:hover {
-  /* box-shadow: 20px 20px gray;
-  filter: brightness(100%);
-  border: 1px solid #b0fc38; */
-  /* width: 310px;
-  height: 310px; */
+.aboutSectionStyle {
+display:flex;
+flex-direction: row;
+justify-content: space-between;
 }
 
 .aboutMeSection1 {
@@ -116,94 +95,83 @@ aboutSection.stacks=data[0].stacks
 
 hr {
   /* width:330px; */
-  filter: brightness(50%)
+  filter: brightness(50%);
 }
 
 .aboutMeSectionOne {
- margin: 20px;
+  margin: 20px;
 }
 
 span {
   margin-top: 32px;
 }
 
-/* .imgSection {
-  margin-top: 50px;
-} */
-.imageContainer{
-  padding-top:10px;
-}
-.imageContainer p{
-  margin-top: 10px;
-}
 
-/* .stackContainer {
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-} */
-
-ul li {
-  list-style-type: none;
-}
-
-.imageContainer ul li::before {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-right: 0.5em;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #b0fc38;
-}
-.imageContainer ul li{
-  margin-left:-30px;
-}
-.imageContainer p {
-  font-weight: bold, italic;
-  color: #b0fc38;
-
-}
 
 p {
   text-align: justify;
 }
 
-.imgStyle{
-  display:block;
-  width:70%;
-  height:auto;
- filter:brightness(80%);
- box-shadow: 15px 15px black, 17px 17px #b0fc38,-15px -15px blue, -17px -17px #b0fc38;
- border: 1px solid #b0fc38;
+.imgStyle {
+  display: block;
+  width: 300px;
+  height: 350px;
+  filter: brightness(80%);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: 30px;
+  margin-left: 10px;
+  border-radius: 10px;
 }
-.imgStyle:hover{
- filter:brightness(100%);
- margin-right:-5px;
- margin-bottom:-5px;
- box-shadow: -15px -15px black, -17px -17px #b0fc38,15px 15px blue, 17px 17px #b0fc38;
-}
+/* .imgStyle:hover {
+  filter: brightness(100%);
+  margin-right: -5px;
+  margin-bottom: -5px;
+  box-shadow: -15px -15px black, -17px -17px #b0fc38, 15px 15px blue, 17px 17px #b0fc38;
+} */
 
-.spanImgStyle{
+.spanImgStyle {
   display: flex;
   justify-content: center;
   align-items: center;
-  width:100%;
-  height:auto;
- 
+  width: 100%;
+  height: auto;
 }
-.stackStyle{
+.stackStyle {
   font-size: 17px;
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
+}
+
+.clickHereStyle{
+  display: flex;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color:#b0fc38;
+  margin-left: 10px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 @media (width <= 750px) {
-  .imgStyle{
-  display:block;
-  width:100%;
-  height:auto;
-}
+  .imgStyle {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-left: 0px;
 
+  }
+  .clickHereStyle{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color:#b0fc38;
+  margin-left: 0px;
+  margin-top: 10px;
+  cursor: pointer;
+}
 }
 </style>

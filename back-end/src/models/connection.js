@@ -8,7 +8,7 @@ const connection=()=>{
 const user=process.env.USER
 const password=process.env.PASSWORD
 const db=process.env.DB
-const dbUrl=(`mongodb+srv://${user}:${password}@clustorkoa.szuiu2s.mongodb.net/${db}?retryWrites=true&w=majority`)
+const dbUrl=(`mongodb+srv://${user}:${password}@cluster0.ptx7rne.mongodb.net/${db}?retryWrites=true&w=majority`)
 
 mongoose.connect(dbUrl,settings).then(()=>{
     console.log("Connected to the DB")
