@@ -25,8 +25,9 @@
           <text v-show="!isVideo" @click="showVideo" class="clickHereStyle">Click here to view a Video</text>
           <text v-show="isVideo" @click="showVideo" class="clickHereStyle">Click here to view an Image</text>
         </b-col>
-     
+    
       </b-col>
+      <SkillSets/>
     </b-row>
   </b-container>
 </template>
@@ -37,6 +38,8 @@ import { onMounted, reactive, ref } from 'vue'
 import SectionHeader from './SectionHeader.vue'
 import VideoIntro from './VideoIntro.vue'
 import videoSource from '../assets/videoIntro.mp4'
+import SkillSets from './SkillSets.vue'
+
 const stateContainer = useStateContainer()
 const aboutSection = reactive({
   aboutSection1: '',
@@ -57,7 +60,7 @@ onMounted(() => {
     aboutSection.stacks = data[0].stacks
   })()
 })
-// console.log('abc',aboutSection.aboutSection1)
+
 </script>
 <style scoped>
 .checkBack {
