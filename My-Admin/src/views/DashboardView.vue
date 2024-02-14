@@ -266,7 +266,7 @@ const handleBlur=()=>{
 
 
 const submitInfo=async()=>{
-await insertInfo({homeTitle:userInfo.homeTitle,homeDetail:userInfo.homeDetail,aboutSection1:userInfo.aboutSection1,aboutSection2:userInfo.aboutSection2,aboutSection3:userInfo.aboutSection3,stacks:selected.value,experiences:experiences.value})
+await insertInfo({homeTitle:userInfo.homeTitle,homeDetail:userInfo.homeDetail,aboutSection1:userInfo.aboutSection1,aboutSection2:userInfo.aboutSection2,aboutSection3:userInfo.aboutSection3,stacks:selected.value})
 }
 </script>
 <style scoped>

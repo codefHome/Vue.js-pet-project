@@ -13,7 +13,7 @@ interface IUserInfo{
   aboutSection2:String;
   aboutSection3:String;
   stacks:String[];
-  experiences:IExperience[];
+  // experiences:IExperience[];
 }
 
 export interface ILogin{
@@ -21,7 +21,7 @@ export interface ILogin{
   password:String;
 }
 export const insertInfo=async(info:IUserInfo)=>{
-const response=await axios.post(myWebEndpoints.insertInfo,info)
+const response=await axios.put(myWebEndpoints.insertInfo,info)
 return response
 }
 
