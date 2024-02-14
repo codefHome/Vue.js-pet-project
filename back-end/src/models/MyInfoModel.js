@@ -28,25 +28,7 @@ const MyInfoModel = new Schema({
     },
     
   },
-  experiences:{
-    type:Array,
-    items:{
-        type:Object,
-        properties:{
-            companyName:{type:String},
-            roleDetail:{
-              type:Array,
-              items:{
-                type:Object,
-                properties:{
-                  content:{type:String}
-                }
-              }
-
-            }
-        }
-    }
-  }
+ 
 });
 
 const MyInfos = model('MyInfo', MyInfoModel);
