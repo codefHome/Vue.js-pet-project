@@ -21,6 +21,7 @@
           <b-col class="mb-5" id="home"><MyHome /> </b-col>
           <b-col class="mb-5 mt-4" id="about"><AboutMe /></b-col>
           <b-col class="mb-5 mt-4" id="experience"><MyExperience /></b-col>
+          <b-col class="mb-5 mt-4" id="work"><MyWork /></b-col>
           <b-col class="mb-5 mt-4" id="contact"><ContactMe /></b-col>
         </b-col>
         <b-col class="sideNavStyle" v-if="!isMinWidth && isActive !=='footer'" xsm="1" sm="1" md="1" lg="1">
@@ -71,6 +72,7 @@ const sections = ref([
   { id: 'home', title: 'Home' },
   { id: 'about', title: 'About' },
   { id: 'experience', title: 'Experience' },
+  { id: 'work', title: 'Work' },
   { id: 'contact', title: 'Contact' },
   {id: 'footer',title:'footer'}
 ])
@@ -87,7 +89,6 @@ onMounted(() => {
 
   sections.value.forEach((section) => {
     const el = document.getElementById(section.id)
-
     observer?.observe(el!)
   })
 })

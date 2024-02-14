@@ -14,3 +14,7 @@ return response
 export const getUserInfo=async()=>{
     return await axios.get(myWebEndpoints.getUserInfo);
 }
+
+export const getExperience=async()=>{
+    return await axios.get(myWebEndpoints.getExperience);
+}

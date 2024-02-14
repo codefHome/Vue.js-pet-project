@@ -1,9 +1,7 @@
 <template>
-     <b-container>
+     <b-container class="skillSetContainer">
     <SectionHeader sectionTitle="My Skill Sets " />
       <b-row class="d-flex justify-content-center">
-       
-        
           <b-row class="imageContainer">
             <b-col>
               <ul>
@@ -43,16 +41,13 @@ onMounted(() => {
   flex-direction: row;
 }
 
-/* .stackContainer {
-  display: grid;
-  grid-template-columns: 6fr 6fr;
-} */
 
 ul li {
   list-style-type: none;
-  width:250px;
+  width:255px;
   margin-right: 20px;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .imageContainer ul li::before {
@@ -82,5 +77,16 @@ p {
   flex-wrap: wrap;
   flex-direction: row;
   gap:30px;
+}
+.skillSetContainer{
+  margin-top: 20px;
+}
+@media (width <= 600px) {
+  ul li {
+ display: flex;
+width: 135px;
+justify-content: start;
+align-items: center;
+}
 }
 </style>

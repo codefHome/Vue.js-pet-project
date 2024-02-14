@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { sendMail, type mailTypes, getUserInfo } from '@/api/myweb.api'
+import { sendMail, type mailTypes, getUserInfo, getExperience } from '@/api/myweb.api'
 
 export const useStateContainer = defineStore({
   id: 'stateContainer',
@@ -24,6 +24,14 @@ export const useStateContainer = defineStore({
       return err
      })
      return result;
+    },
+    async fetchExperience(){
+      const result =await getExperience().then(res =>{
+        return res.data
+      }).catch(err =>{
+        return err
+      })
+      return result
     }
   },
   getters: {}
