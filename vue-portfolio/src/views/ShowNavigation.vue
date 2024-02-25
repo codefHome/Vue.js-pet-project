@@ -16,9 +16,9 @@
             <a href="#experience"  >
                 <img :style="{'margin-right':'8px'}" v-if="isActive === 'experience'" src="@/assets/square.svg" alt="rectangle icon" width="20" height="20"/>
                 <img class="diamondStyle" v-if="isActive !== 'experience'" src="@/assets/diamond.svg" alt="rectangle icon"  width="10" height="10"/></a>
-            <a href="#work" >
+            <!-- <a href="#work" >
                 <img v-if="isActive === 'work'" src="@/assets/square.svg" alt="rectangle icon" width="20" height="20"/>
-                <img class="diamondStyle" v-if="isActive !== 'work'" src="@/assets/diamond.svg" alt="rectangle icon"  width="10" height="10"/></a>
+                <img class="diamondStyle" v-if="isActive !== 'work'" src="@/assets/diamond.svg" alt="rectangle icon"  width="10" height="10"/></a> -->
             <a  href="#contact" >
                 <img  v-if="isActive === 'contact'" src="@/assets/square.svg" alt="rectangle icon" width="20" height="20"/>
                 <img class="diamondStyle" v-if="isActive !== 'contact'" src="@/assets/diamond.svg" alt="rectangle icon"  width="10" height="10"/></a>
