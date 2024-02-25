@@ -1,48 +1,91 @@
 <template>
-   <b-container gap-20>
+  <b-container gap-20>
     <SectionHeader sectionTitle="My Projects" />
-    <b-row class="mt-sm-1 mt-lg-4">
-      <b-col class="pt-sm-1 pt-lg-4" xsm="12" sm="12" md="4" lg="2">
-   <div class="projectContainer">
+<b-col class="projectsContainer" >
+  <div class="projects" v-for="(tech, index) in projects" :key="index">
+      <ProjectCard
+        :image="tech.image"
+        :project-url="tech.url"
+        :-project-source-code="tech.gitHubUrl"
+        :technologies="tech.stacks"
+      />
+    </div>
+</b-col>
 
-   </div>
-      </b-col>
-      <b-col class="experienceContainer" xsm="12" sm="12" md="8" lg="10">
-    
-       
-      </b-col>
-    </b-row>
+  
   </b-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import SectionHeader from './SectionHeader.vue';
-
-export default defineComponent({
-    data() {
-        return {
-            color: 'red',
-        };
-    },
-    components: { SectionHeader }
-});
+<script lang="ts" setup>
+import SectionHeader from './SectionHeader.vue'
+import ProjectCard from '@/components/ProjectCard.vue'
+const projects = [
+  {
+    id: 1,
+    title: 'Music playlist',
+    url: 'https://my-music-playlist.netlify.app/',
+    image: './music-playlist.png',
+    stacks:
+      'React, Redux toolkit, Redux Saga, React Hook Form, Zod, Style-system, emotion, TypeScript, express.js, MongoDB,JWT',
+    gitHubUrl: 'https://github.com/codefHome/react-express-app'
+  },
+  {
+    id: 2,
+    title: 'Course-manager-app',
+    url: 'https://my-music-playlist.netlify.app/',
+    image: './music-playlist.png',
+    stacks:
+      'React, Redux toolkit, RTK Query, MUI, TypeScript, Nest.js PostgreSQL, JWT, TailwindCSS',
+    gitHubUrl: 'https://github.com/codefHome/react-express-app'
+  },
+  {
+    id: 3,
+    title: 'Bedada Bekele',
+    url: 'https://my-music-playlist.netlify.app/',
+    image: './portfolio.png',
+    stacks: 'React, Redux toolkit, RTK Query, TypeScript, express.js mongoose, MongoDB',
+    gitHubUrl: 'https://github.com/codefHome/react-express-app'
+  },
+  {
+    id: 4,
+    title: 'Vue-pet-project',
+    url: 'https://my-music-playlist.netlify.app/',
+    image: './music-playlist.png',
+    stacks: 'Vue.js, Pinia, TypeScript, Express.js, bootstrap',
+    gitHubUrl: 'https://github.com/codefHome/Vue.js-pet-project'
+  }
+]
 </script>
 
 <style scoped>
-.projectContainer{
+.projectsContainer {
   display: flex;
-  flex-direction: column;
-  border: 1 solid white;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height:350px;
-  background-color: gray;
-  width: 400px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  width:100%
+}
+.projects{
+display: flex;
+width:450px;
+height: 250px;
 }
 
+@media (width <= 850px) {
+  .projectsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 10px;
+  }
+  .projects{
+display: flex;
+width:fit-content;
 
-@media (width <= 600px) {
- 
+}
 }
 </style>

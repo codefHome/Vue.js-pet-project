@@ -184,7 +184,6 @@ export interface Experience {
   companyLink: string
   startYear: string
   endYear: string
-
   projects: Project[]
 }
 

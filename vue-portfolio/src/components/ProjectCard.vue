@@ -1,155 +1,136 @@
 <template>
-  <div v-for="(project,index) in projects" :key="index">
- <div  class="projectContainer" >
-            <span class="projectStyle">
-              <span class="projectDetailStyle">
-                <span>
-                  <h5>Projects:</h5>
-                  <h6>{{ project?.ProjectName }}</h6>
-                </span>
-                <span>
-                  <h5>Location:</h5>
-                  <h6>{{ project?.location }} <h5>({{ project?.workType }})</h5> </h6>
-                </span>
-              </span>
-              <span class="projectDetailStyle">
-                <span>
-                  <h5>Role:</h5>
-                  <h6>{{ project?.role }}</h6>
-                </span>
-                <span>
-                  <h6>{{ project?.startDate }} - {{ project?.endDate }}</h6>
-                </span>
-              </span>
-            </span>
-
-            <span class="toggleIcon" v-show="showMore" ><UpIcon /></span>
-            <span class="toggleIcon"  v-show="!showMore"><DownIcon /></span>
-          </div>
-
-          <div v-show="showMore" class="projectSeeMore">
-            <h5>Project Description</h5>
-            <text>
-              <p>
-               {{ project?.projectDescription }}
-              </p>
-            </text>
-
-            <span>
-              <h5>My Responsibilities: &nbsp;</h5>
-              <text>
-                <p>
-                 {{ project?.responsibility }}
-                </p>
-              </text>
-            </span>
-            <span>
-              <h5>Technologies: &nbsp;</h5>
-              <text>
-                <p class="technologies">
-                 {{ project?.technologies }}
-                </p>
-              </text>
-            </span>
-          </div>
-        </div>
+ <b-row class="mt-sm-1 mt-lg-1">
+      <b-col @mouseenter="mouseEnter" @mouseleave="mouseLeave" class="pt-sm-1 pt-lg-1" xsm="12" sm="12" md="4" lg="2">
+   <a :href="projectUrl" target="_blank">
+    <div class="projectContainer">
+    <span>
+<img :src="image" alt="project logo" class="imageStyle"/>
+    </span>
+    <div v-show="isHovered" class="ProjectInformation" >
+     <a :href="ProjectSourceCode" target="_blank">
+     <text> Check source code here</text>
+    </a>
+    <div class="technologiesStyle">
+      <div v-for="(stack,index) in technologies?.split(',')" :key="index">
+      <text >{{ stack }}</text>
+    </div>
+    </div>
+  
+    </div>
+   </div>
+  </a>
+       
+      </b-col>
+   
+    </b-row>
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue';
 
-import UpIcon from '../assets/UpIconArrow.vue'
-import DownIcon from '../assets/DownArrow.vue'
-import { ref,  } from 'vue';
-import type { Project } from './ExperienceCard.vue';
 
-export interface ShowType{
-  show1:boolean;
-  show2:boolean;
-  show3:boolean;
+
+defineProps({
+  image:{type:String},
+  projectUrl:{type:String},
+  ProjectSourceCode:{type:String},
+  technologies: { type:  String }
+})
+
+const isHovered= ref(false)
+const mouseEnter = () =>{
+  isHovered.value=true
 }
-interface MyProps {
-  showMore: boolean;
-  // toggleShowMore: () => void;
-  projects: Project[] 
+const mouseLeave = () =>{
+  isHovered.value = false
 }
-// defineProps({
-//   handleMore:{type: Function },
-//   projects: {type: Array as () => Project[]},
-//   showMore:{type:Boolean}
-//   // {type:Object as () => ShowType},
-
-// })
-const props = defineProps<MyProps>();
-const showMore=ref(props.showMore)
-const projects=ref(props.projects)
-// const toggleShowMore = () => {
-//   showMore.value = !showMore.value;
-//   props.toggleShowMore();
-// };
-console.log({pro:projects.value})
 
 </script>
 <style scoped>
-.toggleIcon {
+.projectContainer{
   display: flex;
-  cursor: pointer;
-  margin-right: -12px;
-  margin-top: -12px;
-}
-.projectSeeMore {
-  display: flex;
+  position: relative;
   flex-direction: column;
-  margin: 10px 0px;
+  justify-content: center;
+ align-items: center;
+  border: thin dashed white;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height:fit-content;
+  width: 460px;
+  padding: 5px;
 }
-.projectSeeMore h5 {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #b0fc38;
+.projectContainer span {
+  display: flex;
+  justify-content: start;
+ align-items: center;
+margin-top: 10px;
+width: 100%;
 }
-.projectSeeMore p {
-  margin-top: 10px;
-  text-align: justify;
+.projectContainer span h5{
+  display: flex;
   font-size: 14px;
-  line-height: 1.6;
 }
-.technologies{
-  color: orange;
+.videoStyle{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 5px;
+}
+.imageStyle{
+  display: flex;
+ max-width: 100%;
+ object-fit: cover;
+}
+
+.technologiesStyle{
+  display: flex;
+  flex-wrap: wrap;
+}
+.technologiesStyle text{
+  display: flex;
+  width:120px;
+  font-size: 14px;
+  font-weight: 400;
+  color:black
+
+}
+.ProjectInformation{
+  position:absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(173, 216, 230, 0.8)
+}
+.ProjectInformation a{
+ text-decoration: none;
+ font-size: 16px;
+ color:blue;
  font-style: italic;
 }
-.projectContainer {
-  display: flex;
-  align-items: center;
-  border: 1px dashed #b0fc38;
-  padding: 10px;
-  margin-bottom: 20px;
+@media (width <= 600px) {
+  .projectContainer{
+  height:fit-content;
+  width: fit-content;
+  padding: 20px;
+  border: thin dashed white;
+  border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #2d361c;
 }
-.projectStyle {
-  display: flex;
-  flex-direction: column;
-  width: 98%;
-}
-.projectDetailStyle {
-  display: flex;
-  justify-content: space-between;
-}
-.projectDetailStyle span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-.projectDetailStyle h5 {
-  color: #b0fc38;
-  font-size: 14px;
-}
-.projectDetailStyle h6 {
- 
-  font-size: 14px;
-}
-.projectStyle p {
-  font-size: 14px;
-  text-align: justify;
+.projectContainer span{
+  width: fit-content;
 }
 
+.imageStyle{
+  max-width:100%;
 
+}
+.technologiesStyle text{
+  display: flex;
+  width:80px;
+  font-size: 14px;
+  font-weight: 400;
+  color:black
+
+}
+}
 </style>

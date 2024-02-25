@@ -34,9 +34,15 @@ onMounted(() => {
 })
 </script>
 <style scoped>
+.imageContainer  {
+ display: flex;
+ width: 100%;
+
+}
 .imageContainer ul {
   margin-top: 10px;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   flex-direction: row;
 }
@@ -44,7 +50,7 @@ onMounted(() => {
 
 ul li {
   list-style-type: none;
-  width:255px;
+  width:150px;
   margin-right: 20px;
   margin-bottom: 10px;
   font-size: 14px;
@@ -84,7 +90,7 @@ p {
 @media (width <= 600px) {
   ul li {
  display: flex;
-width: 135px;
+width: 105px;
 justify-content: start;
 align-items: center;
 }

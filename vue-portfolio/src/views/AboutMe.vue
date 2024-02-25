@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="checkme">
     <SectionHeader sectionTitle="About Me" />
     <b-row class="aboutSectionStyle">
       <b-col sm="12" md="5" lg="6">
@@ -36,9 +36,9 @@ import { useStateContainer } from '@/stores/store'
 import CircleList from './CircleList.vue'
 import { onMounted, reactive, ref } from 'vue'
 import SectionHeader from './SectionHeader.vue'
-import VideoIntro from './VideoIntro.vue'
 import videoSource from '../assets/videoIntro.mp4'
 import SkillSets from './SkillSets.vue'
+import VideoIntro from '@/components/VideoIntro.vue'
 
 const stateContainer = useStateContainer()
 const aboutSection = reactive({
@@ -64,7 +64,7 @@ onMounted(() => {
 </script>
 <style scoped>
 .checkBack {
-  background-color: red;
+
   margin-left: 15px;
 }
 .aboutMeStyle {
@@ -89,6 +89,7 @@ onMounted(() => {
 display:flex;
 flex-direction: row;
 justify-content: space-between;
+
 }
 
 .aboutMeSection1 {

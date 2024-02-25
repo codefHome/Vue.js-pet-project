@@ -109,7 +109,7 @@ li a span {
 }
 
 .navigationStyle {
-  width: 40px;
+  width: fit-content;
   height: 150px;
 }
 .diamondStyle {
