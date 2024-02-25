@@ -1,6 +1,7 @@
 import { environment } from '../environments/environment';
 
 
-export const myWebEndipoints={
-sendMail: `${environment.urls.web}/sendMail`
+export const myWebEndpoints={
+sendMail: `${environment.urls.web}/sendMail`,
+getUserInfo:`${environment.urls.web}/findAllInfo`
 }

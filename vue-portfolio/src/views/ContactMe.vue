@@ -1,53 +1,56 @@
 <template >
   
-<div  class="contactSyle">
-    <section class="contactSection1">
-     <h1>Want to Contact Me</h1>
-    <CircleList/>
-     <span> 
-     <hr/>
-      </span>
-    </section>
-<section class="contactSection2">
-<h1>Send me a Message!</h1>
-<pre>Got a question or proposal, or just want
+<b-container  class="contactSyle">
+   <SectionHeader sectionTitle="Want to Contact Me"/>
+<b-row class="contactSection2">
+
+<b-col class="mb-2">
+    <h1>Send me a Message!</h1>
+</b-col>
+<b-col class="mt-2">
+    <pre>Got a question or proposal, or just want
     to say hello? Go head.
 </pre>
-</section>
-<section class="contactSection3">
-<form @submit.prevent="handleSubmit">
+</b-col>
+
+</b-row>
+<b-row class="contactSection3">
+<form @submit.prevent="handleSubmit" class="formStyle">
     
-    <section class="nameAndEmailStyle">
-        <span>
-        <label>Your Name</label>
-    <input type="text" placeholder="Enter your name" v-model="senderName"/>
-        </span>
-        <span>
-            <label>Email Address</label>
-    <input type="email" placeholder="Enter your email address" v-model="email"/>
-        </span>
-    </section>
-    <section class="messageSection">
-        <label>Your Message</label>
-   <textarea rows="2" :placeholder="placeholderMessage" v-model="message"></textarea>
-    </section>
+    <b-row class="nameAndEmailStyle">
+        <b-col  class="d-flex flex-column ">
+        <label :style="{color:labelColor('name')}" >Your Name</label>
+    <input @focus="isActive = 'name'" @blur="isActive = ''" type="text" placeholder="Enter your name" v-model="senderName" :style="{color:labelColor('name')}"/>
+        </b-col>
+        <b-col  class="d-flex flex-column ">
+            <label :style="{color:labelColor('email')}">Email Address</label>
+    <input @focus="isActive = 'email'" @blur="isActive = ''" type="email" placeholder="Enter your email address" v-model="email"  :style="{color:labelColor('email')}" />
+        </b-col>
+    </b-row>
+    <b-col  class="messageSection">
+      
+            <label :style="{color:labelColor('message')}">Your Message</label>
+   <textarea @focus="isActive='message'" @blur="isActive = ''"  rows="2" :placeholder="placeholderMessage" v-model="message" :style="{color:labelColor('message')}"></textarea>
+        
+       
+    </b-col>
     <section class="contactButtonStyle">
-    
+  
         <button type="submit">Send Email</button>
     </section>
     
 </form>
-</section>
+</b-row>
 
-</div>
+</b-container>
 <SuccessInfo :showModal="showModal"/>
 </template>
 
 <script  lang="ts">
 import {reactive,toRefs,ref} from 'vue'
-import CircleList from './CircleList.vue'
 import {useStateContainer} from '@/stores/store'
 import SuccessInfo from './SuccessInfo.vue'
+import  SectionHeader from './SectionHeader.vue'
 export default{
     setup() {
         const userInfo = reactive({
@@ -56,6 +59,11 @@ export default{
             message: ""
         });
         const showModal=ref(false)
+        const isActive=ref('')
+     
+        const labelColor=(value:string)=>{
+           return isActive.value === value ? '#b0fc38'  :'white'
+        }
 const stateContainer=useStateContainer()
        const handleSubmit= async()=>{
      const result= await stateContainer.sendMail({senderName:userInfo.senderName,email:userInfo.email,message:userInfo.message})
@@ -76,10 +84,12 @@ const stateContainer=useStateContainer()
             ...toRefs(userInfo),
             placeholderMessage,
             handleSubmit,
-            showModal
+            showModal,
+            isActive,
+            labelColor,
         };
     },
-    components: { CircleList,SuccessInfo }
+    components: { SectionHeader, SuccessInfo, }
 }
 
 </script>
@@ -89,38 +99,46 @@ const stateContainer=useStateContainer()
 
 }
 .contactSection2{
-    display:flex;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    
+   margin: 5px;
+   padding:5px;
+ 
 }
 .contactSection2 h1{
     /* font-size:45em; */
     color:blue;
     font-size:50px;
     margin-bottom: -10px;
+    text-align: center;
 }
 .contactSection2 pre{
     /* font-size:25em; */
     color:white;
     font-family: 'Times New Roman', Times, serif;
     font-weight: italic;
+    text-align: center;
+    background:none;
 }
 form{
     display:flex;
    flex-direction: column;
   row-gap: 2em;
+
+  
 }
 .nameAndEmailStyle {
-    display:grid;
+    /* display:grid;
     grid-template-columns: 2fr 2fr;
-    grid-column-gap: 5em;
+    grid-column-gap: 5em; */
 }
-.nameAndEmailStyle  span{
+/* .nameAndEmailStyle  span{
 display: grid;
 grid-template-rows: 2fr 2fr;
-}
-.nameAndEmailStyle  span input{
+} */
+.nameAndEmailStyle   input{
     height:35px;
    background:none;
    border: none;
@@ -128,10 +146,12 @@ grid-template-rows: 2fr 2fr;
    font-size:25px;
    color:white;
 }
-.nameAndEmailStyle  span input:focus{
+.nameAndEmailStyle input:focus{
 outline: none;
+border-bottom: 3px solid #b0fc38;
+
 }
-.nameAndEmailStyle span input:focus::placeholder{
+.nameAndEmailStyle input:focus::placeholder{
 color:transparent;
 }
 .contactSection1{
@@ -160,6 +180,7 @@ color:transparent;
 
 .messageSection textarea:focus{
     outline:none;
+    border-bottom: 3px solid #b0fc38;
 }
 .messageSection textarea:focus::placeholder{
     color:transparent
@@ -191,5 +212,7 @@ color:transparent;
     background-position: 100% 0;
 
 }
-
+.active{
+    color:#b0fc38;
+}
 </style>
