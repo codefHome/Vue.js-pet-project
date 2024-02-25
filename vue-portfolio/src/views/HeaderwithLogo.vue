@@ -3,7 +3,7 @@
     <b-row >
        <b-col   >
         <a href="#home">
-    <img alt="Logo" src="@/assets/mylogo.svg" width="50" height="60"/>
+    <img alt="Logo" src="@/assets/logo1.png" width="50" height="60"/>
       </a>
       </b-col>
       <b-col  v-if="!isMinWidth" class="header">
@@ -22,7 +22,7 @@
       <a href="#contact">Contact</a>
      </li>
      <div class="buttonDiv">
-      <a href="#"> Resume </a>
+      <a href="./resume.pdf" target="_blank"> Resume </a>
      </div>
       
       </ul>
@@ -57,7 +57,7 @@ let isMinWidth=computed(()=>{
 .header nav ul li a{
   text-decoration: none;
   margin:15px;
-  color:blueviolet;
+  color:white;
  
 }
 .header nav ul li a:hover{

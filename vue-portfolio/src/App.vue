@@ -6,8 +6,7 @@
       <b-row class="mainHeader">
         <HeaderwithLogo />
       </b-row>
-      <b-row>
-        <b-col v-if="!isMinWidth && isActive !=='footer'" xsm="1" sm="1" md="1" lg="1">
+      <b-col v-if="!isMinWidth && isActive !=='footer'" xsm="1" sm="1" md="1" lg="1">
           <div>
             <div class="socialLinkStyle">
               <SocialLink />
@@ -16,11 +15,14 @@
             <img class="socialLinkVLineStyle" src="@/assets/vLine.svg" alt="vline" width="1" height="100"/>
           </div>
         </b-col>
-
-        <b-col xsm="11" sm="11" md="10" lg="10">
+      <b-row>
+       
+<b-col xsm="1" sm="1" md="1" lg="1"></b-col>
+        <b-col xsm="12" sm="12" md="12" lg="10" >
           <b-col class="mb-5" id="home"><MyHome /> </b-col>
           <b-col class="mb-5 mt-4" id="about"><AboutMe /></b-col>
           <b-col class="mb-5 mt-4" id="experience"><MyExperience /></b-col>
+          <b-col class="mb-5 mt-4" id="work"><MyWork /></b-col>
           <b-col class="mb-5 mt-4" id="contact"><ContactMe /></b-col>
         </b-col>
         <b-col class="sideNavStyle" v-if="!isMinWidth && isActive !=='footer'" xsm="1" sm="1" md="1" lg="1">
@@ -28,16 +30,7 @@
             <div>
               <ShowNavigation :isActive="isActive" />
             </div>
-            <!-- <div class="myEmail">
-              <p>bedada6@gmail.com</p>
-            </div>
-            <img
-              class="verticalImgStyle"
-              src="@/assets/vLine.svg"
-              alt="SVG image"
-              width="1"
-              height="70"
-            /> -->
+         
           </div>
         </b-col>
       </b-row>
@@ -50,6 +43,7 @@
 
 <script setup lang="ts">
 import AboutMe from './views/AboutMe.vue'
+import SkillSets from './views/SkillSets.vue'
 import ContactMe from './views/ContactMe.vue'
 import MyExperience from './views/MyExperience.vue'
 // import  CheckSection from './views/CheckSection.vue';
@@ -70,6 +64,7 @@ const sections = ref([
   { id: 'home', title: 'Home' },
   { id: 'about', title: 'About' },
   { id: 'experience', title: 'Experience' },
+  { id: 'work', title: 'Work' },
   { id: 'contact', title: 'Contact' },
   {id: 'footer',title:'footer'}
 ])
@@ -86,7 +81,6 @@ onMounted(() => {
 
   sections.value.forEach((section) => {
     const el = document.getElementById(section.id)
-
     observer?.observe(el!)
   })
 })
@@ -100,7 +94,7 @@ window.addEventListener('resize', () => {
   minWidth.value = window.innerWidth
 })
 let isMinWidth = computed(() => {
-  return minWidth.value <= 700 ? true : false
+  return minWidth.value <= 800 ? true : false
 })
 </script>
 
@@ -116,8 +110,9 @@ let isMinWidth = computed(() => {
   width: auto;
   height: 100px;
   padding-top: 25px;
-  box-shadow: 0px 0px 5px 5px grey;
-  background-color: #1d7472;
+
+  background-color: #474747;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 .bodyContainer {
@@ -133,29 +128,13 @@ let isMinWidth = computed(() => {
   top: 150px;
   left: calc(100% - 195px);
 }
-.modalStyle {
-  /* margin-right:30px; */
+.mainContainerBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 'fit-content'
 }
-/* #home{
-  height: 750px;
-} */
-/* #about{
-
-  height: 800px;
-  
- 
-} */
-
-/* #experience{
-
-  height: 800px;
-
-} */
-/* #contact{
-
-  height: 750px;
-
-} */
 .myEmail {
   position: fixed;
   top: 500px;
