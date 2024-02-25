@@ -17,14 +17,10 @@
       </b-col>
       <b-col sm="12" md="6" lg="5" >
         <b-col  class="d-flex  " >
-          <img v-show="!isVideo" class="imgStyle" src="@/assets/Bedada.jpg" alt="My Image" />
-       <VideoIntro v-show="isVideo" :url="videoSource" />
+          <img class="imgStyle" src="@/assets/Bedada.jpg" alt="My Image" />
         </b-col>
         
-        <b-col>
-          <text v-show="!isVideo" @click="showVideo" class="clickHereStyle">Click here to view a Video</text>
-          <text v-show="isVideo" @click="showVideo" class="clickHereStyle">Click here to view an Image</text>
-        </b-col>
+        
     
       </b-col>
       <SkillSets/>
@@ -33,12 +29,10 @@
 </template>
 <script setup lang="ts">
 import { useStateContainer } from '@/stores/store'
-import CircleList from './CircleList.vue'
 import { onMounted, reactive, ref } from 'vue'
 import SectionHeader from './SectionHeader.vue'
-import videoSource from '../assets/videoIntro.mp4'
 import SkillSets from './SkillSets.vue'
-import VideoIntro from '@/components/VideoIntro.vue'
+
 
 const stateContainer = useStateContainer()
 const aboutSection = reactive({
@@ -47,10 +41,7 @@ const aboutSection = reactive({
   aboutSection3: '',
   stacks: []
 })
-const isVideo=ref(false)
-const showVideo=() =>{
-  isVideo.value=!isVideo.value
-}
+
 onMounted(() => {
   ;(async () => {
     const data = await stateContainer.fetchData()
