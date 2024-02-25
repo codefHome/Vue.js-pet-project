@@ -1,2 +1,0 @@
-path/to/large/file filter=lfs diff=lfs merge=lfs -text
-vue-portfolio/src/assets/videoIntro.mp4 filter=lfs diff=lfs merge=lfs -text
