@@ -177,6 +177,23 @@ roleDetails:string[]}>>([])
 const displayExperience=ref(false)
 const isAddExperienceVisible=ref(true)
 const selected=ref<string[]>([])
+  const stack=["React", "Next", "Redux",
+"Redux Toolkit",
+"REST API",
+"RTK Query",
+"Context API", "Vue.js",
+"React Hook Form",
+"JavaScript", "TypeScript",
+"Material UI", "Pinia",
+"Ant Design", "Webpack",
+"Tailwind CSS", "Vite",
+"React Test Library", "Zustand", "Zod",
+"Recharts",
+"HTML", "CSS",
+"Docker", "Git",
+"GitHub", "Jira",
+"Bitbucket", "Jest", ]
+selected.value=stack
 const searchString=ref('')
 const roles=ref<string[]>([])
 function labelColor(value: string) {
@@ -188,7 +205,8 @@ stacks.value.splice(index,1)
 }
 const addSelectedItem=(value:string)=>{
   isDropdownVisible.value=true
-selected.value.push(value)
+ 
+
 searchString.value=''
 }
 
@@ -248,7 +266,7 @@ const handleBlur=()=>{
 
 
 const submitInfo=async()=>{
-await insertInfo({homeTitle:userInfo.homeTitle,homeDetail:userInfo.homeDetail,aboutSection1:userInfo.aboutSection1,aboutSection2:userInfo.aboutSection2,aboutSection3:userInfo.aboutSection3,stacks:selected.value,experiences:experiences.value})
+await insertInfo({homeTitle:userInfo.homeTitle,homeDetail:userInfo.homeDetail,aboutSection1:userInfo.aboutSection1,aboutSection2:userInfo.aboutSection2,aboutSection3:userInfo.aboutSection3,stacks:selected.value})
 }
 </script>
 <style scoped>
@@ -303,6 +321,7 @@ color:transparent;
 .stackStyle{
   border: 1px solid black;
   display: flex; 
+  flex-wrap: wrap;
   flex-grow: 1; 
   flex-basis: 100px;
   background:none;
